@@ -9,13 +9,24 @@
 
 namespace Application\Controller;
 
+use Zend\Log\LoggerInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function indexAction()
     {
+        $this->logger->info("IndexAction");
+        $this->layout()->setVariable('jsModule', 'dashboard');
+        $this->layout()->setVariable('cssModule', 'highcharts');
         return new ViewModel();
     }
 }
