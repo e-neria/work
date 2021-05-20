@@ -54,6 +54,13 @@ return array(
             ),
         ),
     ),
+    'controllers' => array(
+        'invokables' => array(
+        ),
+        'factories' => array(
+            'Application\Controller\Index' => 'Application\FactoryController\IndexControllerFactory'
+        )
+    ),
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -61,6 +68,7 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'logger' => 'Application\Factory\LoggerFactory'
         ),
     ),
     'translator' => array(
@@ -71,11 +79,6 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
         ),
     ),
     'view_manager' => array(
