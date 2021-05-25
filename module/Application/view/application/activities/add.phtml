@@ -1,0 +1,106 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <!--<h1 class="m-0">New Activity</h1>-->
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Activities</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        Add new activity
+    </div>
+    <div class="card-body">
+        <form action="" id="formNewActivity">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                        <label>Title:<span class="required">*</span></label>
+                        <input type="text" name="title" class="form-control" placeholder="Title activity" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                        <label>Description:<span class="required">*</span></label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Enter description" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                        <label>Observations:</label>
+                        <textarea name="Observations" class="form-control" rows="3" placeholder="Enter observations"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Branch:<span class="required">*</span></label>
+                        <input type="text" name="branch" class="form-control" placeholder="Branch where are you working" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <label>Type:<span class="required">*</span></label>
+                        <select id="typeActivity" name="type" class="form-control" required>
+                            <option value="">Select one option</option>
+                            <option value="0">Activity</option>
+                            <option value="1">Sub-Activity</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="activities" class="col-md-4 col-sm-4 col-12 hidden">
+                    <div class="form-group">
+                        <label>Activity:</label>
+                        <select id="activitiesSelect" name="activity" class="form-control">
+                            <option value="">Select one option</option>
+                            <option value="0">Activity</option>
+                            <option value="1">Sub-Activity</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <label>Status:<span class="required">*</span></label>
+                        <select name="status" class="form-control" required>
+                            <option value="">Select one option</option>
+                            <option value="0">Working</option>
+                            <option value="1">Finished</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <label>Start:<span class="required">*</span></label>
+                        <input type="text" id="datePickerStart" name="datePickerStart" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <button type="button" id="btnSaveChanges" class="btn btn-primary btn-block"><i class="fas fa-save"></i>Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="gridActivities">
+
+</div>

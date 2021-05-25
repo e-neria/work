@@ -22,43 +22,29 @@ return array(
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
+            'activities' => array(
+                'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/activities/[:action][/:id]',
+                    'constraints'           => array(
+                        'action'            => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'                => '[*a-zA-Z0-9_-]*',
+                    ),
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
+                        'controller'    => 'Application\Controller\Activities',
                         'action'        => 'index',
+                        'id'            => 0,
                     ),
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+            )
         ),
     ),
     'controllers' => array(
         'invokables' => array(
         ),
         'factories' => array(
-            'Application\Controller\Index' => 'Application\FactoryController\IndexControllerFactory'
+            'Application\Controller\Index' => 'Application\FactoryController\IndexControllerFactory',
+            'Application\Controller\Activities' => 'Application\FactoryController\ActivitiesControllerFactory'
         )
     ),
     'service_manager' => array(
@@ -88,6 +74,8 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
+            'sidebar'                 => __DIR__ . '/../view/layout/navbar.phtml',
+            'sidebar'                 => __DIR__ . '/../view/layout/sidebar.phtml',
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',

@@ -1,0 +1,18 @@
+input.invalid, textarea.invalid, select.invalid {
+    border: solid #DA262D 1px;
+    box-shadow: 0px 0px 4px rgba(218,38,45, 0.3);
+}
+
+strong.invalid {
+    color: #c43c35;
+    font-size: 13px;
+}
+
+.hidden{
+    display: none;
+}
+
+.required {
+    color: red;
+    padding-left: 2px;
+}
