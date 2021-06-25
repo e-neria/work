@@ -15,8 +15,9 @@ class ActivitiesControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $parentLocator = $serviceLocator->getServiceLocator();
-        $logger = $parentLocator->get('logger');
-        return new ActivitiesController($logger);
+        $logger = $parentLocator->get("logger");
+        $activityService = $parentLocator->get("Application\Service\ActivityService");
+        return new ActivitiesController($logger, $activityService);
     }
 
 }

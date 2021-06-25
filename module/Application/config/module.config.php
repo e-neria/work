@@ -54,7 +54,9 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
-            'logger' => 'Application\Factory\LoggerFactory'
+            'logger' => 'Application\Factory\LoggerFactory',
+            'Application\Service\ActivityService' => 'Application\Factory\ActivityServiceFactory',
+            'Application\Service\RequestsToApiService' => 'Application\Factory\RequestsToApiServiceFactory'
         ),
     ),
     'translator' => array(
@@ -74,12 +76,15 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'sidebar'                 => __DIR__ . '/../view/layout/navbar.phtml',
+            'navbar'                 => __DIR__ . '/../view/layout/navbar.phtml',
             'sidebar'                 => __DIR__ . '/../view/layout/sidebar.phtml',
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

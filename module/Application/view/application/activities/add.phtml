@@ -1,3 +1,11 @@
+<?php
+    $titleActivity = isset($this->activity['title']) ? $this->activity['title'] : "";
+    $descriptionActivity = isset($this->activity['description']) ? $this->activity['description'] : "";
+    $observationActivity = isset($this->activity['observations']) ? $this->activity['observations'] : "";
+    $branchActivity = isset($this->activity['branch']) ? $this->activity['branch'] : "";
+    $startActivity = isset($this->activity['start']) ? $this->activity['start'] : "";
+
+?>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -19,11 +27,12 @@
     </div>
     <div class="card-body">
         <form action="" id="formNewActivity">
+            <input type="hidden" id="formAction" value="<?php echo $this->action; ?>">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-12">
                     <div class="form-group">
                         <label>Title:<span class="required">*</span></label>
-                        <input type="text" name="title" class="form-control" placeholder="Title activity" required>
+                        <input type="text" name="title" class="form-control" placeholder="Title activity" value="<?php echo $titleActivity; ?>" required>
                     </div>
                 </div>
             </div>
@@ -31,7 +40,7 @@
                 <div class="col-md-8 col-sm-8 col-12">
                     <div class="form-group">
                         <label>Description:<span class="required">*</span></label>
-                        <textarea name="description" class="form-control" rows="3" placeholder="Enter description" required></textarea>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Enter description" required><?php echo $descriptionActivity; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -39,7 +48,7 @@
                 <div class="col-md-8 col-sm-8 col-12">
                     <div class="form-group">
                         <label>Observations:</label>
-                        <textarea name="Observations" class="form-control" rows="3" placeholder="Enter observations"></textarea>
+                        <textarea name="Observations" class="form-control" rows="3" placeholder="Enter observations"><?php echo $observationActivity; ?></textarea>
                     </div>
                 </div>
             </div>
@@ -47,7 +56,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label>Branch:<span class="required">*</span></label>
-                        <input type="text" name="branch" class="form-control" placeholder="Branch where are you working" required>
+                        <input type="text" name="branch" class="form-control" placeholder="Branch where are you working" value="<?php echo $branchActivity; ?>" required>
                     </div>
                 </div>
             </div>
@@ -57,20 +66,25 @@
                         <label>Type:<span class="required">*</span></label>
                         <select id="typeActivity" name="type" class="form-control" required>
                             <option value="">Select one option</option>
-                            <option value="0">Activity</option>
-                            <option value="1">Sub-Activity</option>
+                            <option value="0" <?php if ($this->activity['type'] == 0) { echo ' selected="selected"'; } ?>>Activity</option>
+                            <option value="1" <?php if ($this->activity['type'] == 1) { echo ' selected="selected"'; } ?>>Sub-Activity</option>
                         </select>
                     </div>
                 </div>
                 <div id="activities" class="col-md-4 col-sm-4 col-12 hidden">
                     <div class="form-group">
                         <label>Activity:</label>
-                        <select id="activitiesSelect" name="activity" class="form-control">
+                        <input type="hidden" id="idActivity" value="">
+                        <input type="text" name="listActivities" id="listActivities" class="form-control" required>
+                        <!--<select id="activitiesSelect" name="activity" class="form-control">
                             <option value="">Select one option</option>
                             <option value="0">Activity</option>
                             <option value="1">Sub-Activity</option>
-                        </select>
+                        </select>-->
                     </div>
+                </div>
+                <div id="clearActivity" class="col-md-1 hidden">
+                    <i class="far fa-times-circle clearActivity"></i>
                 </div>
             </div>
             <div class="row">
@@ -79,8 +93,8 @@
                         <label>Status:<span class="required">*</span></label>
                         <select name="status" class="form-control" required>
                             <option value="">Select one option</option>
-                            <option value="0">Working</option>
-                            <option value="1">Finished</option>
+                            <option value="0" <?php if ($this->activity['status'] == 0) { echo ' selected="selected"'; } ?>>Working</option>
+                            <option value="1" <?php if ($this->activity['status'] == 1) { echo ' selected="selected"'; } ?>>Finished</option>
                         </select>
                     </div>
                 </div>
@@ -89,15 +103,17 @@
                 <div class="col-md-2 col-sm-2 col-12">
                     <div class="form-group">
                         <label>Start:<span class="required">*</span></label>
-                        <input type="text" id="datePickerStart" name="datePickerStart" class="form-control" required>
+                        <input type="text" id="datePickerStart" name="datePickerStart" class="form-control" value="<?php echo $startActivity; ?>" required>
                     </div>
                 </div>
             </div>
+            <?php if($this->action != "show"){ ?>
             <div class="row">
                 <div class="col-md-1">
                     <button type="button" id="btnSaveChanges" class="btn btn-primary btn-block"><i class="fas fa-save"></i>Save</button>
                 </div>
             </div>
+            <?php } ?>
         </form>
     </div>
 </div>

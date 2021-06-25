@@ -87,13 +87,19 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Finished</span>
-                <span class="info-box-number">50 Activities</span>
+                <span class="info-box-number">
+                    <span class="totalActivitiesFinished">
+                        <?php echo $this->partial('loadingHome'); ?>
+                    </span> Activities
+                </span>
 
                 <div class="progress">
                     <div class="progress-bar" style="width: 100%"></div>
                 </div>
                 <span class="progress-description">
-                  38 Sub-Activities
+                  <span class="totalSubActivitiesFinished">
+                      <?php echo $this->partial('loadingHome'); ?>
+                  </span> Sub-Activities
                 </span>
             </div>
         </div>
@@ -103,13 +109,19 @@
             <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Working</span>
-                <span class="info-box-number">3 Activities</span>
+                <span class="info-box-number">
+                    <span class="totalActivitiesWorking">
+                        <?php echo $this->partial('loadingHome'); ?>
+                    </span> Activities
+                </span>
 
                 <div class="progress">
                     <div class="progress-bar" style="width: 100%"></div>
                 </div>
                 <span class="progress-description">
-                  4 Sub-Activities
+                  <span class="totalSubActivitiesWorking">
+                      <?php echo $this->partial('loadingHome'); ?>
+                  </span> Sub-Activities
                 </span>
             </div>
         </div>
