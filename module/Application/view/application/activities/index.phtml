@@ -1,0 +1,79 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">List</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Activities</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-1">
+                                <a href="<?php echo $this->url('activities', array('action' => 'add')); ?>" class="">
+                                    <i class="fas fa-plus"></i>
+                                    <!--Add Activity-->
+                                </a>
+                                <i class="fas fa-search displaySearch"></i>
+                            </div>
+                            <div class="col-10">
+                                <div class="row search" style="display: none">
+                                    <div class="col-11">
+                                        <input class="form-control form-control-sm inputSearch" type="text" id="inputSearch" placeholder="Search">
+                                    </div>
+                                    <div class="col-1">
+                                        <i class="fas fa-search btnSearch"></i>
+                                        <i class="fas fa-times btnClose"></i>
+                                    </div>
+                                </div>
+                                <!--<a class="" href="#" role="button">
+                                </a>-->
+                            </div>
+                            <div class="col-1">
+                                <i class="fa fa-file-excel-o btnExport" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table
+                            id="gridActivities"
+                            class="table table-fixed"
+                            data-toggle="table"
+                            data-pagination="true"
+                            data-sort-name=""
+                            data-ajax="ajaxRequest"
+                            data-side-pagination="server"
+                            data-page-size="20"
+                            data-classes="table table-striped table-condensed"
+                            data-search="false"
+                            data-strict-search="false">
+                            <thead>
+                            <tr>
+                                <th data-sortable="true" data-field="titleActivity">Activity</th>
+                                <th data-sortable="true" data-field="descriptionActivity">Description</th>
+                                <th data-sortable="true" data-field="observationsActivity">Observation</th>
+                                <th data-sortable="true" data-field="statusActivity">Status</th>
+                                <th data-sortable="true" data-field="branchActivity">Branch</th>
+                                <th data-sortable="true" data-field="startActivity">Start</th>
+                                <th data-field="btnActions">Actions</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

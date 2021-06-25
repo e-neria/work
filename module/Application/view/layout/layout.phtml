@@ -4,81 +4,77 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Work | Eduardo Neria</title>
-    <link rel="icon" href="/img/favicon.ico">
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0, shrink-to-fit=no')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="plugins/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <?php $versionConfig = "1.0.0"; ?>
+    <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'img/favicon.ico', 'href' => $this->basePath() . '/img/favicon.ico'))
+            ->prependStylesheet($this->basePath('plugins/jquery-ui-1.12.1.custom/jquery-ui.css'))
+            ->prependStylesheet($this->basePath('dist/css/customStyle.css'))
+            ->prependStylesheet($this->basePath('dist/css/adminlte.min.css'))
+            ->prependStylesheet($this->basePath('plugins/toastr/toastr.min.css'))
+            ->prependStylesheet($this->basePath('plugins/fontawesome-free/css/all.min.css'));
+    ?>
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+    <?php
+        $versionConfig = "1.0.0";
+
+        echo $this->headScript()
+            ->prependFile($this->basePath('plugins/jquery-ui-1.12.1.custom/jquery-ui.js'))
+            ->prependFile($this->basePath('plugins/jquery/validation/jquery.validate.min.js'))
+            ->prependFile($this->basePath('plugins/highcharts/modules/accessibility.js'))
+            ->prependFile($this->basePath('plugins/highcharts/modules/export-data.js'))
+            ->prependFile($this->basePath('plugins/highcharts/modules/exporting.js'))
+            ->prependFile($this->basePath('plugins/highcharts/highcharts-3d.js'))
+            ->prependFile($this->basePath('plugins/highcharts/highcharts.js'))
+            ->prependFile($this->basePath('dist/js/adminlte.js'))
+            ->prependFile($this->basePath('plugins/toastr/toastr.min.js'))
+            ->prependFile($this->basePath('plugins/pdfmake/vfs_fonts.js'))
+            ->prependFile($this->basePath('plugins/pdfmake/pdfmake.min.js'))
+            ->prependFile($this->basePath('plugins/bootstrap/js/bootstrap.bundle.min.js'))
+            ->prependFile($this->basePath('plugins/jquery/jquery.min.js'));
+
+        if (isset($jsModule)) {
+            if ( is_array($jsModule)){
+                foreach ($jsModule as $rowJsModule){ ?>
+                    <script type="text/javascript" src="<?php echo $this->basePath('dist/js/'.$rowJsModule.'.js?version='.$versionConfig) ?>"></script>
+            <?php
+                }
+            }else{
+            ?>
+                <script type="text/javascript" src="<?php echo $this->basePath('dist/js/'.$jsModule.'.js?version='.$versionConfig)
+            ?>"></script>
+            <?php
+            }
+        } ?>
+
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-    <?php echo $this->partial('navbar'); ?>
-    <?php echo $this->partial('sidebar'); ?>
+    <div class="wrapper">
+        <?php echo $this->partial('navbar'); ?>
+        <?php echo $this->partial('sidebar'); ?>
 
-    <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
-                    </div>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="container-fluid">
+                    <?php echo $this->content; ?>
                 </div>
             </div>
         </div>
-        <div class="content">
-            <div class="container-fluid">
-                <?php echo $this->content; ?>
+        <aside class="control-sidebar control-sidebar-dark">
+        </aside>
+
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2021-2021 <a href="https://www.linkedin.com/in/eduardo-neria-apolinar-385983117/" target="_blank">Eduardo Neria</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0
             </div>
-        </div>
+        </footer>
     </div>
-    <aside class="control-sidebar control-sidebar-dark">
-    </aside>
-
-    <footer class="main-footer">
-        <strong>Copyright &copy; 2021-2021 <a href="https://www.linkedin.com/in/eduardo-neria-apolinar-385983117/" target="_blank">Eduardo Neria</a>.</strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0.0
-        </div>
-    </footer>
-</div>
-
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="dist/js/adminlte.js"></script>
-
-<script src="plugins/highcharts/highcharts.js"></script>
-<script src="plugins/highcharts/highcharts-3d.js"></script>
-<script src="plugins/highcharts/modules/exporting.js"></script>
-<script src="plugins/highcharts/modules/export-data.js"></script>
-<script src="plugins/highcharts/modules/accessibility.js"></script>
-
-
-<script src="dist/js/demo.js"></script>
-
-<?php
-
-if (isset($jsModule)) {
-    if ( is_array($jsModule)){
-    foreach ($jsModule as $rowJsModule){ ?>
-        <script type="text/javascript" src="<?php echo $this->basePath('dist/js/'.$rowJsModule.'.js?version='.$versionConfig)
-        ?>"></script>
-    <?php
-    }
-    }else{
-    ?>
-        <script type="text/javascript" src="<?php echo $this->basePath('dist/js/'.$jsModule.'.js?version='.$versionConfig)
-        ?>"></script>
-        <?php
-    }
-} ?>
-
 </body>
 </html>
