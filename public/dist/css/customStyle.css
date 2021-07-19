@@ -1,0 +1,81 @@
+/*
+ * Start Section for icons whit not include in plugin FontAwesone
+ */
+.fa-file-excel-o:before{content:"\f1c3"}
+
+/*
+ * End Section
+ */
+
+input.invalid, textarea.invalid, select.invalid {
+    border: solid #DA262D 1px;
+    box-shadow: 0px 0px 4px rgba(218,38,45, 0.3);
+}
+
+strong.invalid {
+    color: #c43c35;
+    font-size: 13px;
+}
+
+.hidden{
+    display: none;
+}
+
+.required {
+    color: red;
+    padding-left: 2px;
+}
+.fas.fa-save {
+    padding: 0px 10px;
+}
+
+.displaySearch {
+    padding: 0px 15px;
+    color: #007bff;
+}
+
+.clearActivity {
+    padding: 42px 0px 0px 0px;
+    cursor: pointer;
+}
+
+.clearActivity:hover {
+    font-size: 20px;
+}
+
+.fas.fa-times {
+    padding: 0px 10px;
+}
+
+.btnSearch {
+    color: #007bff;
+}
+
+.btnClose {
+    color: red;
+}
+
+.displaySearch:hover, .btnSearch:hover, .btnClose:hover, .fa-plus:hover {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.btnExport{
+    color: green;
+    float: right;
+    padding: 0px 15px;
+}
+
+th.startActivity {
+    width: 10%;
+}
+
+#datePickerStart, #datePickerEnd {
+    width: 85%;
+}
+
+.ui-datepicker-trigger {
+    float: right;
+    margin-top: -25px;
+    margin-right: 10px;
+}

@@ -1,0 +1,141 @@
+<?php
+    $form = $this->form;
+?>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Activities</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <b>Add new activity</b>
+    </div>
+    <div class="card-body">
+        <?php echo $this->form()->openTag($form); ?>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formHidden($form->get('id'));
+                        echo $this->formLabel($form->get('title'));
+                        echo $this->formElement($form->get('title'));
+                        echo $this->formElementErrors($form->get('title'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('description'));
+                        echo $this->formElement($form->get('description'));
+                        echo $this->formElementErrors($form->get('description'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('observations'));
+                        echo $this->formElement($form->get('observations'));
+                        echo $this->formElementErrors($form->get('observations'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('branch'));
+                        echo $this->formElement($form->get('branch'));
+                        echo $this->formElementErrors($form->get('branch'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('typeActivity'));
+                        echo $this->formElement($form->get('typeActivity'));
+                        echo $this->formElementErrors($form->get('typeActivity'));
+                        ?>
+                    </div>
+                </div>
+                <div id="activities" class="col-md-4 col-sm-4 col-12 hidden">
+                    <div class="form-group">
+                        <input type="hidden" id="idActivity" value="">
+                        <?php
+                        echo $this->formLabel($form->get('listActivities'));
+                        echo $this->formElement($form->get('listActivities'));
+                        echo $this->formElementErrors($form->get('listActivities'));
+                        ?>
+                    </div>
+                </div>
+                <div id="clearActivity" class="col-md-1 hidden">
+                    <i class="far fa-times-circle clearActivity"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('status'));
+                        echo $this->formElement($form->get('status'));
+                        echo $this->formElementErrors($form->get('status'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('datePickerStart'));
+                        echo $this->formElement($form->get('datePickerStart'));
+                        echo $this->formElementErrors($form->get('datePickerStart'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formLabel($form->get('datePickerEnd'));
+                        echo $this->formElement($form->get('datePickerEnd'));
+                        echo $this->formElementErrors($form->get('datePickerEnd'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+                echo $this->formHidden($form->get('formAction'));
+                if($this->action != "show"){
+            ?>
+            <div class="row">
+                <div class="col-md-1">
+                    <button type="button" id="btnSaveChanges" class="btn btn-primary btn-block"><i class="fas fa-save"></i>Save</button>
+                </div>
+            </div>
+            <?php } ?>
+        </form>
+    </div>
+</div>
+<div class="gridActivities">
+
+</div>
