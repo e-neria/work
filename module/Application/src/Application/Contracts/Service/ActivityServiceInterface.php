@@ -9,4 +9,5 @@ interface ActivityServiceInterface
     public function getGridActivities($queryStrings);
     public function getListActivities();
     public function show($id);
+    public function save($data);
 }

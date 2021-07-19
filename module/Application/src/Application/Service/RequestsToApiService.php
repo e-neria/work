@@ -18,7 +18,7 @@ class RequestsToApiService
            'Content-Type' => "application/json",
         ));
 
-        if($requestParameters['method'] == "POST"){
+        if(in_array($requestParameters['method'], array('POST', 'PUT', 'PATCH'))){
             $request->setContent(json_encode($requestParameters['payload']));
         }
 
