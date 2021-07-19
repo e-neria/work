@@ -100,7 +100,46 @@ class ActivityService implements ActivityServiceInterface
             'options' => $this->productivityApp['options']
         ];
 
+        $data = $this->requestsToApiService->requestApi($requestParameters);
+
+        $activity = [];
+        if($data['code'] == 200){
+            if(!empty($data['body']['data'])){
+                $activity = $data['body']['data']['0'];
+                //if(!empty($activity)){
+                    $activity['datePickerStart'] = date('m/d/Y', strtotime($activity['datePickerStart']));
+                    $activity['datePickerEnd'] = date('m/d/Y', strtotime($activity['datePickerEnd']));
+                //}
+            }
+        }
+
+        return $activity;
+    }
+
+    public function save($data)
+    {
+        $url = $this->productivityApp['url'] . "/activities";
+        $method = "POST";
+
+        if($data['formAction'] != "add"){
+            $url = $this->productivityApp['url'] . "/activities/" . $data['id'];
+            $method = "PUT";
+        }
+
+        $data['type'] = (int) $data['typeActivity'];
+        $data['status'] = (int) $data['status'];
+        $data['start'] = $data['datePickerStart'];
+        $data['end'] = $data['datePickerEnd'];
+
+        $requestParameters = [
+            'url' => $url,
+            'method' => $method,
+            'options' => $this->productivityApp['options'],
+            'payload' => $data
+        ];
+
         return $this->requestsToApiService->requestApi($requestParameters);
     }
+
 
 }

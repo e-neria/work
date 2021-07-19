@@ -14,6 +14,10 @@ $(document).ready(function() {
     Activity.clearActivity();
     Activity.isShow();
     //Activity.acutocompleteActivities();
+    /*$('#gridActivities').bootstrapTable({
+        scroll": true,
+        scrollY: 200,
+    });*/
 });
 
 function ajaxRequest(params){
@@ -59,7 +63,10 @@ function ajaxRequest(params){
                 datePickerStart: {
                     required: true
                 },
-                type:{
+                datePickerEnd: {
+                    required: true
+                },
+                typeActivity:{
                     required: true
                 },
                 listActivities: {
@@ -83,7 +90,10 @@ function ajaxRequest(params){
                 datePickerStart: {
                     required: "Start date is required."
                 },
-                type: {
+                datePickerEnd: {
+                    required: "End date is required."
+                },
+                typeActivity: {
                     required: "Type activity is required."
                 },
                 listActivities: {
@@ -99,6 +109,7 @@ function ajaxRequest(params){
             if(isValid){
                 console.log('coming soon...');
                 //TODO: Realizar petición ajax, para guardar la actividad
+                $("#formNewActivity").submit();
             }else{
                 toastr.error('Please, complete the required fields for continue.')
             }
@@ -107,7 +118,12 @@ function ajaxRequest(params){
     }
 
     this.datePickerStart = function (){
-        $('#datePickerStart').datepicker();
+        $('#datePickerStart, #datePickerEnd').datepicker({
+            showOn: "button",
+            buttonImage: "/img/schedule.png",
+            buttonImageOnly: true,
+            buttonText: "Select date"
+        });
     }
 
     this.selectTypeActivity = function(){
@@ -223,7 +239,7 @@ function ajaxRequest(params){
 
     this.isShow = function(){
         if($('#formAction').val() == "show"){
-            $('input[type="text"], textarea, select').attr('readonly', true);
+            $('input[type="text"], textarea, select').attr('readonly', true).attr('disabled', true);
         }
         console.log($('#formAction').val());
         console.log("??");
