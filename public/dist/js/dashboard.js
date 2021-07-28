@@ -69,15 +69,6 @@ $(document).ready(function() {
                     stacking: 'normal'
                 }
             },
-            /*series: [{
-                name: 'Activities',
-                data: [dataSeries.finishedActivities, dataSeries.finishedSubActivities],
-                stack: 'male'
-            }, {
-                name: 'SubActivities',
-                data: [dataSeries.workingActivities, dataSeries.workingSubActivities],
-                stack: 'male'
-            }],*/
             series: [{
                 name: 'Activities',
                 data: [dataSeries.finishedActivities, dataSeries.workingActivities],
@@ -89,7 +80,8 @@ $(document).ready(function() {
             }],
             credits: {
                 enabled: false
-            }
+            },
+            colors: ['#7cb5ec', '#90ed7d']
         });
     }
 
