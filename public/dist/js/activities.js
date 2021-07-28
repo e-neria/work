@@ -18,6 +18,8 @@ $(document).ready(function() {
         scroll": true,
         scrollY: 200,
     });*/
+    Activity.currentlyWorking();
+    Activity.onLoad();
 });
 
 function ajaxRequest(params){
@@ -107,8 +109,6 @@ function ajaxRequest(params){
         $("#btnSaveChanges").unbind('click').bind('click', function(event) {
             var isValid = $("#formNewActivity").valid();
             if(isValid){
-                console.log('coming soon...');
-                //TODO: Realizar petición ajax, para guardar la actividad
                 $("#formNewActivity").submit();
             }else{
                 toastr.error('Please, complete the required fields for continue.')
@@ -132,28 +132,8 @@ function ajaxRequest(params){
                 $("#activities").show();
                 $("#activitiesSelect").attr('required','required');
                 $("#activities > div.form-group > label").html('Activity:<span class="required">*</span>');
-
                 //Get Activities
-                jQuery.ajax({
-                    url: '/activities/getListActivities',
-                    type: 'GET',
-                    dataType: 'json',
-                    beforeSend: function () {
-                    },
-                    complete: function (xhr, textStatus) {
-                    },
-                    success: function (data, textStatus, xhr) {
-                        //console.log(data.body.data);
-                        listActivities = data.body.data;
-                        //console.log(listActivities);
-                        Activity.acutocompleteActivities(listActivities);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                    }
-                });
-
-
-
+                Activity.getActivities();
             }else{
                 $("#activities, #clearActivity").hide();
                 $("#activitiesSelect").removeAttr('required');
@@ -163,8 +143,6 @@ function ajaxRequest(params){
     }
 
     this.loadGrid = function(params){
-        console.log('ok in ajax request...');
-
         if(additionalParams.search != undefined){
             params.data.search = additionalParams.search;
         }
@@ -203,15 +181,12 @@ function ajaxRequest(params){
         $('#inputSearch').keyup(function(e){
             if(e.keyCode == 13)
             {
-                console.log('ok');
                 $('.btnSearch').trigger('click')
             }
         });
     }
 
     this.acutocompleteActivities = function(data){
-        console.log('ok.....');
-        console.log(data);
         $("#listActivities").autocomplete({
             source: Object.values(data),
             focus: function( event, ui ) {
@@ -219,8 +194,6 @@ function ajaxRequest(params){
                 return false;
             },
             select: function (event, ui){
-                console.log(ui);
-                console.log(ui.item.label);
                 $("#idActivity").val(ui.item.value);
                 $("#listActivities").val(ui.item.label);
                 $("#clearActivity").show();
@@ -231,6 +204,7 @@ function ajaxRequest(params){
 
     this.clearActivity = function(){
         $(document).on('click', '.clearActivity', function(){
+            Activity.getActivities();
             $("#idActivity").val("");
             $('#listActivities').val("");
             $("#clearActivity").hide();
@@ -241,8 +215,47 @@ function ajaxRequest(params){
         if($('#formAction').val() == "show"){
             $('input[type="text"], textarea, select').attr('readonly', true).attr('disabled', true);
         }
-        console.log($('#formAction').val());
-        console.log("??");
+    }
+
+    this.currentlyWorking = function(){
+        $('.currentlyWorking').on('click', function(){
+            var isCheck = $(this).is(':checked');
+            if(isCheck)
+                $('#divDatePickerEnd').hide();
+            else
+                $('#divDatePickerEnd').show();
+        });
+    }
+
+    this.getActivities = function(){
+        //Get Activities
+        jQuery.ajax({
+            url: '/activities/getListActivities',
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function () {
+            },
+            complete: function (xhr, textStatus) {
+            },
+            success: function (data, textStatus, xhr) {
+                listActivities = data.body.data;
+                Activity.acutocompleteActivities(listActivities);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            }
+        });
+    }
+
+    this.onLoad = function(){
+        var activityId = $('#id');
+        var activityStatus = $('#status');
+        if(activityId.val() != 0){
+            if(activityStatus.val() == 1){
+                $('.currentlyWorking').prop('checked', false);
+                $('#divDatePickerEnd').show();
+                $('#divCurrentlyWorking').hide();
+            }
+        }
     }
 }).apply(Activity);
 
