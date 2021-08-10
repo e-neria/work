@@ -6,6 +6,20 @@ $(document).ready(function() {
     Activity.onLoad();
     Activity.formValidate();
     Activity.formSave();
+    //Activity.datePickerStart();
+    //Activity.selectTypeActivity();
+    //Activity.showSearch();
+    //Activity.hideSearch();
+    //Activity.search();
+    //Activity.searchEnterKey();
+    //Activity.clearActivity();
+    //Activity.isShow();
+    //Activity.acutocompleteActivities();
+    /*$('#gridActivities').bootstrapTable({
+        scroll": true,
+        scrollY: 200,
+    });*/
+    //Activity.currentlyWorking();
 });
 
 function ajaxRequest(params){
@@ -84,12 +98,8 @@ function ajaxRequest(params){
             var isCheck = $(this).is(':checked');
             if(isCheck)
                 $('#divDatePickerEnd').hide();
-            else{
-                var now = new Date();
-                var dateEnd = (String(parseInt(now.getMonth()) + 1)).padStart(2, '0') + "/" + String(now.getDate()).padStart(2, '0') + "/" + now.getFullYear();
-                $('#datePickerEnd').val(dateEnd);    
+            else
                 $('#divDatePickerEnd').show();
-            }
         });
 
         var activityId = $('#id');
@@ -209,6 +219,64 @@ function ajaxRequest(params){
         });
     }
 
+    // this.datePickerStart = function (){
+    //     $('#datePickerStart, #datePickerEnd').datepicker({
+    //         showOn: "button",
+    //         buttonImage: "/img/schedule.png",
+    //         buttonImageOnly: true,
+    //         buttonText: "Select date"
+    //     });
+    // }
+
+    // this.selectTypeActivity = function(){
+    //     $("#typeActivity").change(function(){
+    //         if($("#typeActivity").val() == 1){
+    //             $("#activities").show();
+    //             $("#activitiesSelect").attr('required','required');
+    //             $("#activities > div.form-group > label").html('Activity:<span class="required">*</span>');
+    //             //Get Activities
+    //             Activity.getActivities();
+    //         }else{
+    //             $("#activities, #clearActivity").hide();
+    //             $("#activitiesSelect").removeAttr('required');
+    //             $("#activities > div.form-group > label").html('Activity:');
+    //         }
+    //     });
+    // }
+
+    // this.showSearch = function(){
+    //     $(document).on('click', '.displaySearch', function(){
+    //         $('.search').show();
+    //         $('.displaySearch').hide();
+    //     });
+    // }
+
+    // this.hideSearch = function(){
+    //     $(document).on('click', '.btnClose', function(){
+    //         $('#inputSearch').val('');
+    //         additionalParams = {};
+    //         $('.search').hide();
+    //         $('.displaySearch').show();
+    //         $('#gridActivities').bootstrapTable('refresh');
+    //     });
+    // }
+
+    // this.search = function (){
+    //     $(document).on('click', '.btnSearch', function(){
+    //         additionalParams = {search: $('#inputSearch').val()};
+    //         $('#gridActivities').bootstrapTable('refresh');
+    //     });
+    // }
+
+    // this.searchEnterKey = function(){
+    //     $('#inputSearch').keyup(function(e){
+    //         if(e.keyCode == 13)
+    //         {
+    //             $('.btnSearch').trigger('click')
+    //         }
+    //     });
+    // }
+
     this.acutocompleteActivities = function(data){
         $("#listActivities").autocomplete({
             source: Object.values(data),
@@ -224,6 +292,31 @@ function ajaxRequest(params){
             }
         });
     }
+
+    // this.clearActivity = function(){
+    //     $(document).on('click', '.clearActivity', function(){
+    //         Activity.getActivities();
+    //         $("#idActivity").val("");
+    //         $('#listActivities').val("");
+    //         $("#clearActivity").hide();
+    //     });
+    // }
+
+    // this.isShow = function(){
+    //     if($('#formAction').val() == "show"){
+    //         $('input[type="text"], textarea, select').attr('readonly', true).attr('disabled', true);
+    //     }
+    // }
+
+    // this.currentlyWorking = function(){
+    //     $('.currentlyWorking').on('click', function(){
+    //         var isCheck = $(this).is(':checked');
+    //         if(isCheck)
+    //             $('#divDatePickerEnd').hide();
+    //         else
+    //             $('#divDatePickerEnd').show();
+    //     });
+    // }
 
     this.getActivities = function(){
         //Get Activities

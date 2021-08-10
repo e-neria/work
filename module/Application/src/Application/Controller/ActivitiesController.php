@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Contracts\Service\ActivityServiceInterface;
 use Application\Form\ActivityForm;
+use Application\Form\ObservationForm;
 use Zend\Log\LoggerInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -124,6 +125,7 @@ class ActivitiesController extends AbstractActionController
         $response['activity'] = $activity;
         $response['action'] = "update";
         $response['form'] = $form;
+        $response['observationForm'] = new ObservationForm("ObservationForm");
 
         $this->layout()->setVariable('jsModule', 'activities');
         $viewModel = new ViewModel($response);
