@@ -79,3 +79,11 @@ th.startActivity {
     margin-top: -25px;
     margin-right: 10px;
 }
+
+.currentlyWorking {
+    margin-right: 10px;
+}
+
+.modalDialogObservations{
+    max-width: 800px;
+}

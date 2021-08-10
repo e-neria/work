@@ -1,3 +1,5 @@
 /vendor/
 .idea/*
 /commits.txt
+.vscode/*
+.history/*

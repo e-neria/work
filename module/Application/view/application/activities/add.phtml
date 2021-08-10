@@ -1,5 +1,8 @@
 <?php
     $form = $this->form;
+    if(isset($this->observationForm)){
+        $observationForm = $this->observationForm;
+    }
 ?>
 <div class="content-header">
     <div class="container-fluid">
@@ -49,6 +52,11 @@
                     <div class="form-group">
                         <?php
                         echo $this->formLabel($form->get('observations'));
+                        if($this->action == "update"){
+                        ?>
+                            <i class="fas fa-plus addObservation"></i>
+                        <?php
+                        }
                         echo $this->formElement($form->get('observations'));
                         echo $this->formElementErrors($form->get('observations'));
                         ?>
@@ -76,9 +84,38 @@
                         ?>
                     </div>
                 </div>
+                <?php 
+                if($this->action == "show" || $this->action == "update"){
+                    $parentTitle = (!empty($this->activity['parentId'])) ? $this->activity['parentTitle'] : "";
+                    $parentId = (!empty($this->activity['parentId'])) ? $this->activity['parentId'] : "";
+                    if(!empty($parentId)){
+                ?>
+                        <div id="activities" class="col-md-4 col-sm-4 col-12">
+                            <div class="form-group">
+                                <input type="hidden" name="idActivity" id="idActivity" value="<?php echo $parentId; ?>">
+                                <?php
+                                echo $this->formLabel($form->get('listActivities'));
+                                echo $this->formElement($form->get('listActivities')->setValue($parentTitle));
+                                echo $this->formElementErrors($form->get('listActivities'));
+                                ?>
+                            </div>
+                        </div>
+                <?php
+                    }
+                if($this->action == "update"){
+                    if(!empty($parentId)){
+                ?>
+                        <div id="clearActivity" class="col-md-1">
+                            <i class="far fa-times-circle clearActivity"></i>
+                        </div>
+                <?php
+                    }
+                } 
+                }else{
+                ?>
                 <div id="activities" class="col-md-4 col-sm-4 col-12 hidden">
                     <div class="form-group">
-                        <input type="hidden" id="idActivity" value="">
+                        <input type="hidden" name="idActivity" id="idActivity" value="">
                         <?php
                         echo $this->formLabel($form->get('listActivities'));
                         echo $this->formElement($form->get('listActivities'));
@@ -89,6 +126,7 @@
                 <div id="clearActivity" class="col-md-1 hidden">
                     <i class="far fa-times-circle clearActivity"></i>
                 </div>
+                <?php } ?>
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-12">
@@ -113,7 +151,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-sm-2 col-12">
+                <div id="divCurrentlyWorking" class="col-md-2 col-sm-2 col-12">
+                    <div class="form-group">
+                        <?php
+                        echo $this->formElement($form->get('currentlyWorking'));
+                        echo $this->formLabel($form->get('currentlyWorking'));
+                        echo $this->formElementErrors($form->get('currentlyWorking'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="divDatePickerEnd" class="col-md-2 col-sm-2 col-12 hidden">
                     <div class="form-group">
                         <?php
                         echo $this->formLabel($form->get('datePickerEnd'));
@@ -136,6 +185,55 @@
         </form>
     </div>
 </div>
-<div class="gridActivities">
-
+<div class="modal addObservations" tabindex="-1" role="dialog">
+    <div class="modal-dialog modalDialogObservations" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add observations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <?php 
+                    if(isset($observationForm)){
+                        echo $this->formLabel($observationForm->get('observation'));
+                        echo $this->formElement($observationForm->get('observation'));
+                        echo $this->formElementErrors($observationForm->get('observation'));
+                    }
+                ?>
+                </div>
+                
+                <div class="row">
+                    <div class="card-body">
+                        <table
+                            id="gridObservations"
+                            class="table table-striped table-hover"
+                            data-toggle="table"
+                            data-pagination="true"
+                            data-sort-name=""
+                            data-ajax="ajaxRequestObservations"
+                            data-side-pagination="server"
+                            data-page-size="20"
+                            data-classes="table table-striped table-condensed"
+                            data-search="false"
+                            data-strict-search="false">
+                            <thead>
+                            <tr>
+                                <th data-sortable="true" data-field="titleActivity">Id</th>
+                                <th data-sortable="true" data-field="observationsActivity">Observation</th>
+                                <!-- <th data-sortable="false" data-field="btnEdit">Edit</th> -->
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
 </div>

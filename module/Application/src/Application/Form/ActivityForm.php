@@ -166,5 +166,20 @@ class ActivityForm extends Form
             ),
         ));
 
+        $this->add(array(
+            'name'       => "currentlyWorking",
+            'type' => 'Zend\Form\Element\Checkbox',
+            'attributes' => array(
+                'class' => "currentlyWorking",
+                'checked' => "checked"
+            ),
+            'options' => array(
+                'label' => 'Currently working.',
+                'use_hidden_element' => true,
+                'checked_value' => 1,
+                'unchecked_value' => 0,
+            )
+        ));
+
     }
 }
