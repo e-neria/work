@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <?php
                         echo $this->formLabel($form->get('observations'));
-                        if($this->action == "update"){
+                        if($this->action == "update" || $this->action == "show"){
                         ?>
                             <i class="fas fa-plus addObservation"></i>
                         <?php
@@ -204,35 +204,35 @@
                     }
                 ?>
                 </div>
-                
                 <div class="row">
                     <div class="card-body">
                         <table
                             id="gridObservations"
                             class="table table-striped table-hover"
-                            data-toggle="table"
                             data-pagination="true"
-                            data-sort-name=""
-                            data-ajax="ajaxRequestObservations"
-                            data-side-pagination="server"
-                            data-page-size="20"
+                            data-sort-name=""                        
+                            data-side-pagination="client"
+                            data-page-size="10"
                             data-classes="table table-striped table-condensed"
                             data-search="false"
                             data-strict-search="false">
                             <thead>
                             <tr>
-                                <th data-sortable="true" data-field="titleActivity">Id</th>
-                                <th data-sortable="true" data-field="observationsActivity">Observation</th>
-                                <!-- <th data-sortable="false" data-field="btnEdit">Edit</th> -->
+                                <th data-sortable="true" data-field="observation" data-width="500">Observation</th>
+                                <th data-sortable="true" data-field="created_at">Created At</th>
                             </tr>
                             </thead>
+                            <tbody id="bodyGridObservations">
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <?php if($this->action != "show"){?>
+                <button type="button" class="btn btn-primary" id="btnSaveObservation">Save changes</button>
+            <?php } ?>
         </div>
         </div>
     </div>

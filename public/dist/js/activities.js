@@ -79,6 +79,10 @@ function ajaxRequest(params){
             $('input[type="text"], textarea, select').attr('readonly', true).attr('disabled', true);
         }
 
+        if($('#id').val() != ""){
+            $('#observations').attr('readonly', true).attr('disabled', true);
+        }
+
         //currentlyWorking
         $('.currentlyWorking').on('click', function(){
             var isCheck = $(this).is(':checked');
@@ -104,7 +108,48 @@ function ajaxRequest(params){
 
         //addObservation
         $(document).on('click', '.addObservation', function(){
+            //loadGridObservations
+            if($('#id').val() != "" && $('#id').val() != undefined){
+                var urlGridObservations = "/observations/index";
+                $.ajax({
+                    method: 'POST',
+                    dataType: 'json',
+                    url: urlGridObservations,
+                    data: { activityId: $('#id').val()},
+                    success: function(response) {
+                        $('#gridObservations').bootstrapTable({
+                            data: response.body.data
+                        });
+                    }
+                });
+            }
             $('.addObservations').modal('show');
+        });
+
+        $(document).on('click', '#btnSaveObservation', function(){
+            //saveObservation
+            var urlGridObservations = "/observations/add";
+            $.ajax({
+                method: 'POST',
+                dataType: 'json',
+                url: urlGridObservations,
+                data: { 
+                    activityId: $('#id').val(),
+                    observation: $('#observation').val()
+                },
+                beforeSend:function(){
+                    $('#bodyGridObservations').html('');
+                    $('#bodyGridObservations').append('<tr><td colspan="2"><div class="alert alert-warning text-center generando hide"><i class="fa fa-spinner fa-spin fa-4x fa-fw"></i><h4>Guardando observación.</h4></div></td></tr>');
+                },
+                success: function(response) {
+                    $('#observation').val('');
+                    $('#gridObservations').bootstrapTable("destroy");
+                    $('#gridObservations').bootstrapTable({
+                        data: response.observations.body.data
+                    });
+                    toastr.success(response.data.body.message);
+                }
+            });
         });
     }
 
