@@ -15,7 +15,7 @@ class RequestsToApiService
         $request->setUri($requestParameters['url']);
         $request->setMethod($requestParameters['method']);
         $request->getHeaders()->addHeaders(array(
-           'Content-Type' => "application/json",
+            'Content-Type' => "application/json",
         ));
 
         if(in_array($requestParameters['method'], array('POST', 'PUT', 'PATCH'))){
