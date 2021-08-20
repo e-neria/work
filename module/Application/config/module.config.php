@@ -36,6 +36,21 @@ return array(
                         'id'            => 0,
                     ),
                 ),
+            ),
+            'observations' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/observations/[:action][/:id]',
+                    'constraints'           => array(
+                        'action'            => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'                => '[*a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        'controller'    => 'Application\Controller\Observations',
+                        'action'        => 'index',
+                        'id'            => 0,
+                    ),
+                ),
             )
         ),
     ),
@@ -44,7 +59,8 @@ return array(
         ),
         'factories' => array(
             'Application\Controller\Index' => 'Application\FactoryController\IndexControllerFactory',
-            'Application\Controller\Activities' => 'Application\FactoryController\ActivitiesControllerFactory'
+            'Application\Controller\Activities' => 'Application\FactoryController\ActivitiesControllerFactory',
+            'Application\Controller\Observations' => 'Application\FactoryController\ObservationsControllerFactory',
         )
     ),
     'service_manager' => array(
@@ -56,7 +72,8 @@ return array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
             'logger' => 'Application\Factory\LoggerFactory',
             'Application\Service\ActivityService' => 'Application\Factory\ActivityServiceFactory',
-            'Application\Service\RequestsToApiService' => 'Application\Factory\RequestsToApiServiceFactory'
+            'Application\Service\RequestsToApiService' => 'Application\Factory\RequestsToApiServiceFactory',
+            'Application\Service\ObservationService' => 'Application\Factory\ObservationServiceFactory',
         ),
     ),
     'translator' => array(
